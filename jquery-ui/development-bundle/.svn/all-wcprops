@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/postme/!svn/ver/34/1/jquery-ui/development-bundle
+END
+GPL-LICENSE.txt
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/postme/!svn/ver/34/1/jquery-ui/development-bundle/GPL-LICENSE.txt
+END
+AUTHORS.txt
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/postme/!svn/ver/34/1/jquery-ui/development-bundle/AUTHORS.txt
+END
+package.json
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/postme/!svn/ver/34/1/jquery-ui/development-bundle/package.json
+END
+MIT-LICENSE.txt
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/postme/!svn/ver/34/1/jquery-ui/development-bundle/MIT-LICENSE.txt
+END
+jquery-1.8.2.js
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/postme/!svn/ver/34/1/jquery-ui/development-bundle/jquery-1.8.2.js
+END
