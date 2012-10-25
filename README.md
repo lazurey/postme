@@ -22,3 +22,8 @@ A light website for exchanging postcard with bootstrap.
 示例网站
 -----
 我只能为你寄一张小小的卡片: [http://postme.sinaapp.com]
+
+说明
+-----
+* db.inc.php用来保存数据库链接, 请修改其中的数据库链接, 用户名密码
+* db.sql是所用到的数据表
