@@ -21,7 +21,9 @@ A light website for exchanging postcard with bootstrap.
 
 示例网站
 -----
-我只能为你寄一张小小的卡片: [http://postme.sinaapp.com]
+[我只能为你寄一张小小的卡片][1]
+
+[1]: http://postme.sinaapp.com
 
 说明
 -----
