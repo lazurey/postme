@@ -18,37 +18,42 @@ if ($flag) {
     <div class="container no-head-container" style="padding-top: 60px;">
       <h2 style="text-transform:uppercase;" class="event-h2">
         <?php echo $row['event_location'];
+            $location_len = mb_strlen($row['event_location'], 'UTF8');
+            if ($location_len > 8) {
+              
+            }
             if ($row['status'] == "1") {
-              if (date("m/d/Y", strtotime("10/19/2012")) > date("m/d/Y", strtotime($row['deadline']))) {
+              if (time() > strtotime($row['deadline'])) {
                 $expireFlag = true;
                 echo '<span class="label">已过期</span>';
               } else {
                 echo '<span class="label label-success">进行中</span>';
               }
             } else {
+              $expireFlag = true;
               echo '<span class="label">已过期</span>';
             }
         ?>
       </h2>
       <div class="span6">
         <dl class="dl-horizontal">
-          <dt>发起人: </dt>
+          <dt>发起人 : </dt>
           <dd id="event-founder">
             <?php echo $row['id']; ?>
           </dd>
         </dl>
         <dl class="dl-horizontal">
-          <dt>人数上限: </dt>
+          <dt>人数上限 : </dt>
           <dd id="total-amount">
             <?php echo $row['max_sum']; ?>
           </dd>
         </dl>
         <dl class="dl-horizontal">
-          <dt>截止日期: </dt>
+          <dt>截止日期 : </dt>
           <dd id="deadline"><?php echo $row['deadline']; ?></dd>
         </dl>
         <dl class="dl-horizontal">
-          <dt>说明: </dt>
+          <dt>说明 : </dt>
           <dd id="remark"><?php echo $row['remark']; ?></dd>
         </dl>
       </div>
@@ -70,8 +75,14 @@ if ($flag) {
               if ($row['uid'] == $_COOKIE['uid']) {
                 $isJoined = true;
               }
-              echo "<li><img src='images/" . $row['img'] . "' /><br>";
-              echo "<p class='user-name'><a href='user.php?uid=" . $row['uid'] . "'>" . $row['id'] . "</a></p></li>";
+              echo "<li><img src='images/" . $row['img'] . "' />";
+              //echo "<p class='user-name'><a href='user.php?uid=" . $row['uid'] . "'>" . $row['id'] . "</a></p></li>";
+              echo "<p class='user-name'>" . $row['id'] . "";
+              if ($row['status'] == 2) {
+                echo "<small><code>已寄出</code></small>";
+              }
+              echo "</p></li>";
+
             } ?>
             </ul>
           <?php } else {
@@ -82,18 +93,15 @@ if ($flag) {
       <div class="clearfix"></div>
       <div class="button-group">
         <?php
-          if ($isJoined && $_COOKIE['uid'] != $row['uid']) { 
+          if ($isJoined && $_COOKIE['uid'] != $row['uid'] && !$expireFlag) { 
             echo "<button class='btn' onclick='quitEvent(" . $_COOKIE['uid'] . ", " . $_GET['event_id'] . ");'>" ?>
               <i class='icon-minus'></i> 官人, 我不要了</button>
-         <?php } else if ($_COOKIE['uid'] != $row['uid'] && !$expireFlag) {
+        <?php } else if ($_COOKIE['uid'] != $event_founder_id && !$expireFlag) {
         ?>
           <a href="#addrSel" role="button" data-toggle="modal">
           <button class="btn btn-success"><i class='icon-plus'></i> 官人, 我要</button></a>
         <?php } ?>
         <?php 
-          if ($expireFlag) {
-            echo "<div class='alert alert-block'>该活动已过期</div>";
-          }
           if ($event_founder_id == $_COOKIE['uid']) {
             echo "<button class='btn btn-info' onclick='location.href=\"event-admin.php?event_id=" . $_GET['event_id'] . "\";'><i class='icon-wrench'></i> 管理活动</button>";
           } else {
@@ -141,7 +149,7 @@ if ($flag) {
               $addrHtml .= "</table>";
               $addrHtml .= "<input type='hidden' name='event_id' value='" . $_GET['event_id'] . "'>";
             } else {
-              $addrHtml .= "<div class='alert alert-block'>你还没有录入过地址, 现在<a href='my-address.php'>添加一个</a>吧~</div>";
+              $addrHtml .= "<div class='alert alert-block'>你还没有录入过地址, 现在<a href='my-address.php#myModal'>添加一个</a>吧~</div>";
               $checkFlag = false;
             }
             echo $addrHtml;
@@ -176,7 +184,18 @@ $("#joinEvent").submit(function(event) {
   });
 
 function quitEvent(userId, eventId) {
-  alert("暂时你不要还不行...");
+  if (confirm("确认不要了? 官人很想给呢...")) {
+    $.ajax({
+        url: "quit-event.php",
+        data: "event_id=" + eventId + "",
+        type: "POST" 
+      }).done(function(data) {
+        alert("哼, 不要就不要!");
+        location.href = "event.php?event_id=" + eventId;
+      });
+  } else {
+    return false;
+  }
 }
 </script>
   </body>

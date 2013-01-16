@@ -3,7 +3,9 @@
     ?>
   	<div class="no-head-container container">
   		<div class="hero-unit">
-  			<h1>我只能为你寄一张小小的卡片</h1>
+  			<h1>MONOers' Postcard</h1>
+        <small>我只能为你寄一张小小的卡片</small>
+        <img class="post-img" src="images/poststamp.png" />
   		</div>
   		<div class="row">
         <?php

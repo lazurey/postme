@@ -58,9 +58,6 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
           <li>
             <a href="my-address.php">地址薄</a>
           </li>
-          <li>
-            <a href="about.php">关于</a>
-          </li>
         </ul>
         <ul class="nav pull-right">
           <?php
@@ -72,7 +69,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
           <?php
             } else {
           ?>
-            <li><a href="login.php">登陆</a></li>
+            <li><a href="login.php">登录</a></li>
           <?php
             }
           ?>

@@ -27,21 +27,36 @@ $(function() {
     changeYear: true
   });
 });
+
+function delEvent(event_id) {
+  if (!confirm("为了防止是你手误点的这个按钮, 所以我还是来话唠一下, 你确认吗?")) {
+    return false;
+  }
+  $.ajax({
+      url: "del-event.php",
+      data: "event_id=" + event_id,
+      type: "POST" 
+    }).done(function(data) {
+      location.href = "events.php";
+    });
+}
 </script>
     <div class="container no-head-container">
       <h2 style="text-transform:uppercase;">
-        <?php echo $row['event_location'];
-            if ($row['status'] == "1") {
-              echo '<span class="label label-success">进行中</span>';
-            } else {
-              echo '<span class="label">已过期</span>';
-            }
+        <?php 
+          echo "<a class='admin-title' href='event.php?event_id=" . $row['event_id'] . "' title='回到活动'>" . $row['event_location'] . "</a>";
+          if ($row['status'] == "1") {
+            echo '<span class="label label-success">进行中</span>';
+          } else {
+            echo '<span class="label">已过期</span>';
+          }
         ?>
       </h2>
       <div id="event-admin">
         <ul class="nav nav-tabs">
           <li class="active"><a href="#edit-event" data-toggle="tab">编辑</a></li>
           <li><a href="#manage-event" data-toggle="tab">寄片记录</a></li>
+          <li><a href="#delete-event" data-toggle="tab">删除活动</a></li>
         </ul>
         <div id="tab-content" class="tab-content">
           <div id="edit-event" class="tab-pane fade active in">
@@ -77,11 +92,27 @@ $(function() {
                   echo "<div class='manage-addr'><p>" . $user['id'] . "</p>";
                   echo "<p><i class='icon-envelope'></i><span>" . $user['addr_tag'] . "</span><p></div>";
                   echo "<address>" . $user['address'] . "</address></div>";
+                  if ($user['status'] == 1) {
+                    echo "<div class='span1 post-block'><label class='checkbox'><input type='checkbox' value='" . $user['uid'] . "' >已寄出</label></div>";
+                  } else {
+                    echo "<div class='span1 post-block'><span class='label'>已寄出</span></div>";
+                  }
                 }
               } else {
                 echo "<div class='alert alert-block'>还没人参加</div>";
               }
             ?>
+            <div class="span8">
+              <?php echo "<button type='submit' class='btn btn-primary' onclick='savePostOnes(" . $_GET['event_id'] . ");'>"; ?>
+                保存寄出状态</button>
+            </div>
+          </div>
+          <div id="delete-event" class="tab-pane fade">
+            <p>做官人太难了, 我放弃, 我忏悔</p>
+            <p>
+              <?php echo "<button type='submit' class='btn btn-primary' onclick='delEvent(" . $_GET['event_id'] . ");'>"; ?>
+                删除该活动</button>
+            </p>
           </div>
         </div>
       </div>
@@ -103,4 +134,24 @@ $(function() {
       include("footer.html");
     ?>
   </body>
+  <script type="text/javascript">
+    function savePostOnes(eventId) {
+      var postOnes = "";
+      $('.checkbox :checked').each(function(){
+        postOnes += this.value + ",";
+      });
+      if (postOnes == "") {
+        alert("请选择已寄出的地址");
+        return false;
+      }
+      postOnes = postOnes.substr(0, postOnes.length - 1);
+      $.ajax({
+        url: "update-post.php",
+        data: "event_id=" + eventId + "&post_users=" + postOnes + "",
+        type: "POST" 
+      }).done(function(data) {
+        location.href = "event.php?event_id=" + eventId;
+      });
+    }
+  </script>
 </html>

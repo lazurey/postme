@@ -5,8 +5,8 @@
         $password = md5(trim($_POST['password']));
         $checkSql = "SELECT * FROM users WHERE email = '" . $email . "'";
         $img = rand(1, 10000);
-        $img = $img%7 + 1;
-        $img = $img . ".jpg";
+        $img = $img%8 + 1;
+        $img = $img . ".png";
         mysql_query("SET NAMES utf8");
         $checkResult = mysql_query($checkSql);
         if (mysql_num_rows($checkResult) > 0) {

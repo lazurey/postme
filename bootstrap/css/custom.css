@@ -1,3 +1,17 @@
+body {
+	background: url(../bg.png);
+}
+
+.hero-unit {
+	position: relative;
+	text-align: center;
+}
+
+.hero-unit small {
+	float: right;
+	margin-right: 133px;
+}
+
 .event-location {
 	font-size: 90px;
 	text-transform: uppercase;
@@ -28,32 +42,40 @@
 }
 
 .event-h2 {
-	font-size: 180px;
+	font-size: 160px;
 	color: #C5C5C5;
 	margin-bottom: 40px;
 	line-height: 100px;
-	text-align: right;
-	width: 65%;
+	text-align: center;
+	width: 90%;
 }
 
 .event-member li {
-	float: left;
-	width: 70px;
+	width: 290px;
 	padding: 5px;
-	text-align: center;
+	text-align: left;
 }
 
 .event-member li img {
-	width: 50px;
-	height: 50px;
+	width: 30px;
+	border-radius: 5px;
 }
 
 .event-member .user-name {
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
-	width: 70px;
+	display: inline;
+	padding-left: 5px;
 	-o-text-overflow: ellipsis;
+}
+
+.event-member .user-name small code {
+	padding: 1px;
+	color: #797979;
+	background: none repeat scroll 0% 0% rgb(255, 242, 171);
+	margin-left: 5px;
+	font-size: 10px;
 }
 
 .button-group {
@@ -77,3 +99,46 @@
 .ui-tabs-vertical .ui-tabs-nav li a { display:block; }
 .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; border-right-width: 1px; }
 .ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 40em;}
+
+.nav-tabs {
+	margin-bottom: 0;
+}
+
+.tab-content {
+	background: #ffffff;
+	padding: 20px;
+}
+
+#browser-alert p {padding: 10px 15px; margin: 0;}
+
+.alert-block {
+	margin-top: 20px;
+}
+
+.post-block {
+	padding: 40px 0 0 20px;
+}
+
+a.admin-title {
+	color: black;
+}
+
+a.admin-title:hover {
+	text-decoration: none;
+}
+
+.user-img {
+	width: 50px;
+	border-radius: 10px;
+}
+
+.selected-img {
+	border: 3px dotted red;
+}
+
+.post-img {
+	width: 180px;
+	position: absolute;
+	right: -30px;
+	bottom: -18px;
+}

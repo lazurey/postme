@@ -9,7 +9,12 @@
           $append_html .= "<tr onclick=\"document.location='event.php?event_id=" . $row['event_id'] . "'\">";
           $append_html .= "<td><label class='event-location'>" . $row['event_location'] . "</label></td>";
           $append_html .= "<td><span>" . $row['id'] . "<span><td>";
-          $append_html .= "<td><span>" . $row['deadline'] . "</span></td></tr>";
+          if (time() > strtotime($row['deadline'])) {
+            $append_html .= "<td><span class='label'>已过期</span></td>";
+          } else {
+            $append_html .= "<td><span class='label label-success'>进行中</span></td>";
+          }
+          //$append_html .= "<td><span>" . $row['deadline'] . "</span></td></tr>";
         }
       } else {
         $append_html = "现在还没有人要寄片, <a href='add-event.php'>我来发起一个吧</a>~";
