@@ -14,8 +14,6 @@ A light website for exchanging postcard with bootstrap.
 
 仍然存在的问题
 ------
-* 不能退出活动;
-* 不能编辑和删除地址;
 * 修改昵称后, 导航栏的昵称不会马上变更.
 * 不能选择头像和上传图片
 
